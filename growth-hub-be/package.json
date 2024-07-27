@@ -1,0 +1,43 @@
+{
+  "name": "growth-hub-be",
+  "version": "1.0.0",
+  "description": "🚀 Welcome to the back-end repository of our Personal Growth Web Application! 🌱",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Growth-hubs/growth-hub-be.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Growth-hubs/growth-hub-be/issues"
+  },
+  "homepage": "https://github.com/Growth-hubs/growth-hub-be#readme",
+  "dependencies": {
+    "16": "^0.0.2",
+    "@types/dotenv": "^8.2.0",
+    "aws-sdk": "^2.1579.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwk-to-pem": "^2.0.5",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.2",
+    "node-fetch": "^2.7.0",
+    "typescript": "^5.4.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
+  }
+}

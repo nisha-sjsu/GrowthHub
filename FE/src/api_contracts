@@ -1,0 +1,196 @@
+Q. Allowing only one AP for a mission?
+
+User Details: 
+Name (string), Email (string), Pass (string), Age (integer), Gender (string), Education / Career History (string), 
+AP of Missions (string), Interests (career, exercise, study, health / fitness, chores, self-care) (array of strings), 
+verified (boolean), apAvailabiltiy (boolean=default false)
+
+Mission:
+user uuid (string), mission uuid (string), mission (string), mission objective (string), expectation from AP (string), 
+status (finished / in-progress / Archived) (string), started on (date), created on (date), private / public (string), 
+parent mission uuid (for public missions) (string), total replication of missions (integer), assigned AP (string), 
+mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+
+Tasks:
+mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), 
+Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+
+ApRequest:
+apId, warriorId, missionId, status (pending, accepted, rejected), expectation from AP
+
+# user authentication
+POST
+/login
+request-body:
+{
+  email, password
+}
+responce-body: {body: {usertoken: "", user-details: "", error: "wrong password/username" }}
+
+# Sign-up
+POST
+/registeration
+request-body:
+{
+  firstname, lastname, email, password
+}
+response-body: {status: 200, body: {message: "successfully logged in, verify email" }}
+
+# Login
+POST
+/login
+request-body:
+{
+  email, password
+}
+responce-body: {body: {usertoken: "", user-details: "", error: "wrong password/username" }}
+
+# Get user profile
+/user-profile/:userId
+GET
+request-body: (header has the token of the user which will help us identify the user)
+responce-body:
+{
+  Name (string), Email (string), Pass (string), Age (integer), Gender (string), Education / Career History (string), AP of Missions (string), Interests (career, exercise, study, health / fitness, chores, self-care) (array of strings), verified (boolean)
+}
+
+# Update user profile
+/user-profile/:userId
+PUT/PATCH
+request-body:
+{
+  updated profile fields
+}
+responce-body:
+{
+  Name (string), Email (string), Pass (string), Age (integer), Gender (string), Education / Career History (string), AP of Missions (string), Interests (career, exercise, study, health / fitness, chores, self-care) (array of strings), verified (boolean)
+}
+
+# Mission Creation
+/missions
+POST
+request-body:
+{
+  Mission creation data: mission (string), mission objective (string), expectation from AP (string), private / public (string), parent mission uuid (for public missions) (string), assigned AP (string), mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+  Task creation data (as an array): tasks title (string), expected completion date / repetition of reminders
+}
+responce-body: { status: 200, error: unable to create mission}
+
+# Create Task
+/missions/:missionId/tasks
+POST
+request-body:
+{
+  Task creation data (as an array): tasks title (string), repition type (daily, weeekly, monthly), expected completion date / repetition of reminders (start date is today by default)
+}
+responce-body:
+{ status: 200, error: unable to create task}
+
+# Get single mission
+/missions/:missionId
+GET
+request-body:
+{
+  missionUuid
+}
+responce-body: 
+{
+  Mission: user uuid (string), mission uuid (string), mission (string), mission objective (string), expectation from AP (string), status (finished / in-progress / Archived) (string), started on (date), created on (date), private / public (string), parent mission uuid (for public missions) (string), total replication of missions (integer), assigned AP (string), mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+  Tasks: mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+}
+
+# Get all tasks of a mission
+/missions/:missionId/tasks
+GET
+request-body:
+{
+  missionUuid
+}
+responce-body:
+{
+  Tasks (array): mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+}
+
+# Get a specific tasks
+/missions/:missionID/tasks/:taskID
+GET
+request-body:
+{
+  missionUuid, taskUuid
+}
+responce-body:
+{
+  Tasks: mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+}
+
+# Get all missions of a user
+/missions
+GET
+request-body: (header has the token of the user which will help us identify the user)
+responce-body:
+{
+  Mission (array): user uuid (string), mission uuid (string), mission (string), mission objective (string), expectation from AP (string), status (finished / in-progress / Archived) (string), started on (date), created on (date), private / public (string), parent mission uuid (for public missions) (string), total replication of missions (integer), assigned AP (string), mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+  Tasks (array): mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+}
+
+# Get Public challenges
+/public/missions?search=&&type=
+GET
+request-body:
+{
+  searchString, typeArrayString
+}
+responce-body:
+{
+  Mission (array): user uuid (string), mission uuid (string), mission (string), mission objective (string), expectation from AP (string), status (finished / in-progress / Archived) (string), started on (date), created on (date), private / public (string), parent mission uuid (for public missions) (string), total replication of missions (integer), assigned AP (string), mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+  Tasks (array): mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+}
+
+
+
+# Get All Ap's
+/aps
+GET
+request-body:
+{}
+responce-body: 
+{
+  Users data who are AP's
+}
+
+# Filter based on aps
+/aps?category=
+category (array of strings)
+request-body:
+{}
+responce-body: 
+{
+  Users data who are AP's
+}
+
+# Send request to AP
+/aps
+POST
+request-body
+{
+  missionId, warriorId, apId (we haven't stored the request to the mission data model yet, maybe we should)
+}
+responce-body
+{
+  request sent succefully 
+}
+- when you update the AP request table, ensure that you also grab the "expectation from AP" from the mission table/document/object
+
+# AP Accept request
+/warriors/requests
+POST
+request-body:
+{
+  mission ID, warrior Id, apId
+}
+- update the mission
+- update the user (AP's) profile
+responce-body:
+{
+  request accepted successfully
+}

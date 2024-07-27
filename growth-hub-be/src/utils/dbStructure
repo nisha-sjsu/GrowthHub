@@ -1,0 +1,65 @@
+User Details: Name (string), Email (string), Pass (string), Age (integer), Gender (string), Education / Career History (string), AP of Missions (string), Interests (career, exercise, study, health / fitness, chores, self-care) (array of strings), verified (boolean)
+
+Mission: user uuid (string), mission uuid (string), mission (string), mission objective (string), expectation from AP (string), status (finished / in-progress / Archived) (string), started on (date), created on (date), private / public (string), parent mission uuid (for public missions) (string), total replication of missions (integer), assigned AP (string), mission category (career, exercise, study, health / fitness, chores, self-care) (string)
+
+Tasks: mission uuid (string), task uuid (string), tasks (string), created date (date), status (completed / missed / late / scheduled for future) (string), Expected Date (when it is supposed to be done)  (date), completion date (date), comment object (object)
+
+USER
+{
+    "userId": "uuid",
+    "name": "John Doe",
+    "age": 30,
+    "gender": "Male",
+    "email": "john.doe@example.com",
+    "pass": "encryptedPassword123",
+    "educationCareerHistory": "BSc Computer Science, Software Engineer at TechCorp",
+    "apOfMissions": ["Mission AP1"],
+    "interests": ["career", "exercise", "study", "health / fitness", "chores", "self-care"],
+    careerHistory: "string";
+    profilePicture: "string";
+    "apActive": boolean,
+    "verified": true
+}
+
+
+MISSION
+
+{
+    "userUuid": "123e4567-e89b-12d3-a456-426614174000",
+    "missionUuid": "987e6543-a21c-43ef-b678-123456789012",
+    "missionName": "Increase Market Share",
+    "missionObjective": "Achieve a 10% market share increase by Q4",
+    "status": "in-progress",
+    "startDate": "2024-04-01",
+    "endDate": "2024-04-01",
+    "publicMission": boolean,
+    "parentMissionUuid": "null",
+    "totalReplicationOfMissions": 5,
+    "assignedAP": "Jane Smith",
+    "missionCategory": "career"
+    "expectationFromAP": "Lead marketing efforts and coordinate team tasks",    
+}
+
+TASK
+
+{
+    "missionUuid": "987e6543-a21c-43ef-b678-123456789012",
+    "taskUuid": "321e6543-a89b-22c3-f456-987654321098",
+    "taskTitle": "Develop a new advertising campaign",
+    "status": "scheduled for future",
+    "expectedDate": "2024-05-15",
+    "completionDate": null,
+    "commentObject": {}
+}
+
+AP Request
+
+{
+    "apId": "AP123456",
+    "warriorId": "W123456789",
+    "status": "in-progress",
+    "missionId": "987e6543-a21c-43ef-b678-123456789012",
+    "expectationFromAp": "Provide continuous support and oversight throughout the mission"
+}
+
+
